@@ -11,3 +11,13 @@
 <% @outputs.each do |output| %>
     <%= "#{output.Name} #{output.Qty}"%><br>
 <% end %>
+
+<h1>------Feats-----</h1>
+<% @feats.each do |feat| %>
+    <%= "#{feat.Feat}"%><br>
+<% end %>
+
+<h1>------Skills-----</h1>
+<% @skills.each do |skill| %>
+    <%= "#{skill.Skill} #{skill.Rank}"%><br>
+<% end %>

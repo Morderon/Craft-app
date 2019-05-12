@@ -7,6 +7,8 @@ class RecipecController < ApplicationController
 			@recipe = Recipe.find(params[:ID])
 			@inputs = @recipe.input
                         @outputs = @recipe.output
+                        @feats = @recipe.feat
+                        @skills = @recipe.skill
 		rescue => e
 			flash[:notice] = "Invalid ID Supplied"
 			redirect_to skillindex_url
