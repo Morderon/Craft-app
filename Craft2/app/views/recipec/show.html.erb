@@ -1,0 +1,13 @@
+<h1>Recipe</h1>
+
+
+<%= @recipe.Name %> Skill: <%= @recipe.Skill %><br>
+<h1>------Inputs-----</h1>
+<% @inputs.each do |input| %>
+    <%= link_to "#{input.Name} #{input.Qty}", input_path(input.Name) %><br>
+<% end %>
+
+<h1>------Outputs-----</h1>
+<% @outputs.each do |output| %>
+    <%= "#{output.Name} #{output.Qty}"%><br>
+<% end %>

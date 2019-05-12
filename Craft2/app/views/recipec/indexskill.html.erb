@@ -1,0 +1,11 @@
+<% flash.each do |key, value| %>
+  <div class="alert"><%= value %></div>
+<% end %>
+<h1>Skills</h1>
+
+<%= link_to "Carpentry (#{@skill1})", skill_path(1) %><br>
+<%= link_to "Herb(#{@skill2})", skill_path(2) %><br>
+<%= link_to "Art (#{@skill3})", skill_path(3) %><br>
+<%= link_to "Forging (#{@skill4})", skill_path(4) %><br>
+<%= link_to "Alchemy (#{@skill5})", skill_path(5) %><br>
+<%= link_to "Tailoring (#{@skill6})", skill_path(6) %><br>

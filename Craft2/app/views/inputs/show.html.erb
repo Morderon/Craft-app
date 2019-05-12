@@ -1,0 +1,13 @@
+
+
+<% flash.each do |key, value| %>
+  <div class="alert"><%= value %></div>
+<% end %>
+
+<h1>Input recipe list</h1>
+
+
+<h1>------Recipes-----</h1>
+<% @recipes.each do |recipe| %>
+	 <%= link_to "#{recipe.Name} Skill: #{recipe.Skill}", recipe_path(recipe) %><br>
+<% end %>
