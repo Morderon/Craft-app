@@ -36,11 +36,21 @@ DC:
     <%= "#{skill.Skill} #{skill.Rank}"%><br>
 <% end %>
 
-<h1>------Classes (Level: 
+<h1>------Classes (Level:
 <script>
   classLevel(<%= @recipe.Class_Level %>);
 </script>
 )-----</h1>
 <script>
   listClass(<%= @recipe.Class %>);
+</script>
+
+<h1>-----Settings--------</h1>
+<script>
+  listSettings(<%= @recipe.Settings %>);
+</script>
+
+<h1>------Races-----</h1>
+<script>
+  listRace(<%= @recipe.SubRace %>);
 </script>

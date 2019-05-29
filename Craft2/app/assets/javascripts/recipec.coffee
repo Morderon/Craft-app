@@ -47,3 +47,34 @@ root.classLevel = (level) ->
   if level < 3
     level = 3
   document.write level
+
+root.listSettings = (setting) ->
+  if setting != 0
+    nbit = 2
+    nNth = 1
+    message = ""
+    slist = ["Hidden", "Surface Races", "Underdark Races", "Highest Level Class Only", "Match All Skills", "Match All Feats", "Ability modified removed from skill check", "Feat bonuses removed from skill check"]
+    while nNth < slist.length
+      message += slist[nNth] + ": "
+      if nbit & setting
+        message += "No"
+      else
+        message += "Yes"
+
+      message += "<br>"
+      nbit *= 2
+      nNth++
+
+    document.write message
+
+root.listRace = (race) ->
+  if race != 0
+    lrace = ["Shield Dwarf", "Moon Elf", "Half-Orc", "Human", "Half-Elf", "Lightfoot", "Rock Gnomes", "Duergar", "Drow", "Deep Gnome", "Orog", "Gnoll", "Fey", "Goblin", "Kobold", "Forest Gnome", "Sun Elf", "Wood Elf", "Wild Elf", "Gold Dwarf", "Aasimar", "Tiefling", "Strongheart", "Ghostwise", "Hobgoblin", "Imp", "Ogre", "Wild Dwarf", "Deep Imaskari", "Derro"]
+    nbit = 1
+    message = ""
+    for i in lrace
+      if nbit & race
+        message += i + "<br>"
+      nbit *= 2
+
+    document.write message
