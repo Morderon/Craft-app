@@ -5,9 +5,17 @@
 Skill:
 <script>
   craftName(<%= @recipe.Skill %>);
+</script><br>
+Points:
+<script>
+  craftPoints(<%= @recipe.Points %>, <%= @recipe.Value %>);
 </script>
+DC:
+<script>
+  craftDC(<%= @recipe.DC %>, <%= @recipe.Value %>);
+</script><br>
 
-DC: <%= @recipe.DC %><br>
+
 <h1>------Inputs-----</h1>
 <% @inputs.each do |input| %>
     <%= link_to "#{input.Name} #{input.Qty}", input_path(input.Name) %><br>
@@ -27,3 +35,12 @@ DC: <%= @recipe.DC %><br>
 <% @skills.each do |skill| %>
     <%= "#{skill.Skill} #{skill.Rank}"%><br>
 <% end %>
+
+<h1>------Classes (Level: 
+<script>
+  classLevel(<%= @recipe.Class_Level %>);
+</script>
+)-----</h1>
+<script>
+  listClass(<%= @recipe.Class %>);
+</script>
