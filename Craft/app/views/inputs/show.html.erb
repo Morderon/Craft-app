@@ -6,8 +6,14 @@
 
 <h1>Input recipe list</h1>
 
-
+<br>
 <h1>------Recipes-----</h1>
 <% @recipes.each do |recipe| %>
-	 <%= link_to "#{recipe.Name} Skill: #{recipe.Skill}", recipe_path(recipe) %><br>
+  <%= link_to  recipe_path(recipe) do %>
+      <%= recipe.Name %>
+      Skill:
+      <%= javascript_tag do -%>
+        craftName(<%= recipe.Skill %>);
+      <% end %>
+   <% end %> <br>
 <% end %>

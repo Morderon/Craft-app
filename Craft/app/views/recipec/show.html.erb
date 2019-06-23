@@ -3,17 +3,18 @@
 
 <%= @recipe.Name %> <br>
 Skill:
-<script>
+<%= javascript_tag do -%>
   craftName(<%= @recipe.Skill %>);
-</script><br>
+<% end %><br>
 Points:
-<script>
+<%= javascript_tag do -%>
   craftPoints(<%= @recipe.Points %>, <%= @recipe.Value %>);
-</script>
-DC:
-<script>
-  craftDC(<%= @recipe.DC %>, <%= @recipe.Value %>);
-</script><br>
+<% end %>
+ DC:
+<%= javascript_tag do -%>
+  craftDC(<%= @recipe.DC %>, <%= @recipe.Value %>)
+<% end %>
+<br>
 
 
 <h1>------Inputs-----</h1>
@@ -37,20 +38,20 @@ DC:
 <% end %>
 
 <h1>------Classes (Level:
-<script>
+<%= javascript_tag do -%>
   classLevel(<%= @recipe.Class_Level %>);
-</script>
+<% end %>
 )-----</h1>
-<script>
+<%= javascript_tag do -%>
   listClass(<%= @recipe.Class %>);
-</script>
+<% end %>
 
 <h1>-----Settings--------</h1>
-<script>
+<%= javascript_tag do -%>
   listSettings(<%= @recipe.Settings %>);
-</script>
+<% end %>
 
 <h1>------Races-----</h1>
-<script>
+<%= javascript_tag do -%>
   listRace(<%= @recipe.SubRace %>);
-</script>
+<% end %>
