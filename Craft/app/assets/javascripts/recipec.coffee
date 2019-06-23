@@ -3,9 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 root = exports ? this
+
+
 root.craftName = (skill) ->
   names = ["Carpentry", "Herb", "Art", "Forging", "Alchemy", "Tailoring"]
-  document.write names[skill-1]
+  names[skill-1]
+
 
 root.craftPoints = (points, value) ->
   if points == 0
@@ -13,7 +16,7 @@ root.craftPoints = (points, value) ->
 
   if points < 1
     points = 1
-  document.write points
+  points
 
 root.craftDC = (DC, value) ->
   if DC == 0
@@ -27,7 +30,7 @@ root.craftDC = (DC, value) ->
     DC = nNth+1
     if DC == 0
       DC = 1
-  document.write DC
+  DC
 
 root.listClass = (classN) ->
   if classN != 0
@@ -41,12 +44,12 @@ root.listClass = (classN) ->
       nNth++
       nBit *= 2
 
-    document.write sList
+    sList
 
 root.classLevel = (level) ->
   if level < 3
     level = 3
-  document.write level
+  level
 
 root.listSettings = (setting) ->
   if setting != 0
@@ -65,7 +68,7 @@ root.listSettings = (setting) ->
       nbit *= 2
       nNth++
 
-    document.write message
+    message
 
 root.listRace = (race) ->
   if race != 0
@@ -77,4 +80,4 @@ root.listRace = (race) ->
         message += i + "<br>"
       nbit *= 2
 
-    document.write message
+    message

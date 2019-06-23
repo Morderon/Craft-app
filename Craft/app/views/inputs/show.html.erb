@@ -1,5 +1,3 @@
-
-
 <% flash.each do |key, value| %>
   <div class="alert"><%= value %></div>
 <% end %>
@@ -8,12 +6,22 @@
 
 <br>
 <h1>------Recipes-----</h1>
-<% @recipes.each do |recipe| %>
-  <%= link_to  recipe_path(recipe) do %>
-      <%= recipe.Name %>
-      Skill:
-      <%= javascript_tag do -%>
-        craftName(<%= recipe.Skill %>);
-      <% end %>
-   <% end %> <br>
+<% @recipes.each_with_index do |recipe, index| %>
+  <%= link_to  "#{recipe.Name} Skill: ", recipe_path(recipe), id:"#{index}", skill:"#{recipe.Skill}" %>
+  <br>
+<% end %>
+
+<%= javascript_tag do -%>
+window.onload = LoadJS();
+function LoadJS(){
+    var i = 0;
+    var element = document.getElementById(i++);
+    var node;
+    while(element !== null)
+    {
+      node = document.createTextNode(craftName(element.getAttribute('skill')));
+      element.appendChild(node);
+      element = document.getElementById(i++);
+    }
+  }
 <% end %>

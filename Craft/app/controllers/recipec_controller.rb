@@ -1,7 +1,7 @@
 class RecipecController < ApplicationController
-    #def index
+    def index
         #@recipes = Recipe.all
-    #end
+    end
     #Shows the individual recipe page
     def show
         begin

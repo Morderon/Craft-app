@@ -1,19 +1,11 @@
 <h1>Recipe</h1>
 
-
 <%= @recipe.Name %> <br>
-Skill:
-<%= javascript_tag do -%>
-  craftName(<%= @recipe.Skill %>);
-<% end %><br>
-Points:
-<%= javascript_tag do -%>
-  craftPoints(<%= @recipe.Points %>, <%= @recipe.Value %>);
-<% end %>
- DC:
-<%= javascript_tag do -%>
-  craftDC(<%= @recipe.DC %>, <%= @recipe.Value %>)
-<% end %>
+<div id="cname"></div>
+<div id="cpoints"></div>
+<div id="cdc"></div>
+
+
 <br>
 
 
@@ -37,21 +29,24 @@ Points:
     <%= "#{skill.Skill} #{skill.Rank}"%><br>
 <% end %>
 
-<h1>------Classes (Level:
-<%= javascript_tag do -%>
-  classLevel(<%= @recipe.Class_Level %>);
-<% end %>
-)-----</h1>
-<%= javascript_tag do -%>
-  listClass(<%= @recipe.Class %>);
-<% end %>
+<h1 id="clevel"></h1>
+<div id='cclass'></div>
 
 <h1>-----Settings--------</h1>
-<%= javascript_tag do -%>
-  listSettings(<%= @recipe.Settings %>);
-<% end %>
+<div id='csettings'></div>
 
 <h1>------Races-----</h1>
+<div id='craces'></div>
+
 <%= javascript_tag do -%>
-  listRace(<%= @recipe.SubRace %>);
+  window.onload = LoadJS();
+  function LoadJS(){
+    document.getElementById('cname').innerHTML = "Skill: " + craftName(<%= @recipe.Skill %>);
+    document.getElementById('cpoints').innerHTML = "Points: " +craftPoints(<%= @recipe.Points %>, <%= @recipe.Value %>);
+    document.getElementById('cdc').innerHTML = "DC: " + craftDC(<%= @recipe.DC %>, <%= @recipe.Value %>);
+    document.getElementById('clevel').innerHTML =  "------Classes (Level: " + classLevel(<%= @recipe.Class_Level %>) + ")-----";
+    document.getElementById('cclass').innerHTML = listClass(<%= @recipe.Class %>);
+    document.getElementById('csettings').innerHTML = listSettings(<%= @recipe.Settings %>);
+    document.getElementById('craces').innerHTML = listRace(<%= @recipe.SubRace %>);
+  }
 <% end %>
