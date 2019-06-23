@@ -1,37 +1,31 @@
 class InputsController < ApplicationController
+	#lists recipes by material
 	def show
 		nameArray = params[:Name].split(',')
 
 		@inputs = []
 		flash[:notice] = ""
-		if(nameArray.length > 1 && params[:any] != "any")
-			chk = true
-			@inputs = Input.where("Name IN (?)", nameArray).having('COUNT(Recipe_ID) >= ?', nameArray.length).group('Recipe_ID')
-    end
-
-		if(@inputs.empty?)
-			@inputs = Input.where("Name IN (?)", nameArray)
-			if(chk)
-				flash[:notice] = "No matches found for all. Displaying matches for any."
-			end
-	  end
-		list = []
-		@inputs.find_each do |input|
-    	list.push("#{input.Recipe_ID}")
-	  end
-    skillArray = []
+		#get skill selection, or all skills if there's an error or they're not provided
+		skillArray = []
 		if(params[:Skill].present?)
 			skillArray = params[:Skill].split(',')
-	  end
+		end
 		if(skillArray.empty?)
 			skillArray = [1,2,3,4,5,6]
 		end
-
-		begin
-			@recipes = Recipe.where("ID IN (?) AND Skill IN (?)", list, skillArray)
-		rescue => e
-			flash[:notice] = "No matching recipes from all supplied items."
-			redirect_to skillindex_url
+		#Creates the list of recipes if required, must match all materials give
+		@recipes = []
+		if(nameArray.length > 1 && params[:any] != "any")
+			chk = true
+			@recipes = Recipe.joins(:input).where("md_cr_input.Name IN (?) AND Skill IN (?)", nameArray, skillArray).having('COUNT(Recipe_ID) >= ?', nameArray.length).group("md_cr_recipes.id")
 		end
+		#creates the list of recipes if they don't have to match all or the above
+		if(@recipes.empty?)
+			@recipes = Recipe.joins(:input).where("md_cr_input.Name IN (?)", nameArray).group(:id)
+			if(chk)
+				flash[:notice] = "No matches found for all. Displaying matches for any."
+			end
+		end
+
 	end
 end
