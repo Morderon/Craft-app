@@ -4,10 +4,10 @@ class JsonController < ApplicationController
   def index
     # Load all recipes and preload relational models
     @all = Recipe
-      .includes(:output, :input, :feat, :skill)
-      .joins("INNER JOIN md_cr_category ON md_cr_category.id=md_cr_recipes.category")
+      .includes(:category, :output, :input, :feat, :skill)
+      .joins("INNER JOIN md_cr_category AS c ON c.id=md_cr_recipes.category")
       .where("Settings & 1 != 1")
-      .references(:output, :input, :feat, :skill)
+      .references(:category, :output, :input, :feat, :skill)
 
     @structured = {
       'byCraft' => {},
@@ -20,17 +20,18 @@ class JsonController < ApplicationController
         @structured['byCraft'][recipe.Skill] = { 'byID' => {}, 'byCategory' => {} }
       end
 
-      if !@structured['byCraft'][recipe.Skill]['byCategory'].has_key? recipe.category
-        @structured['byCraft'][recipe.Skill]['byCategory'][recipe.category] = {}
+      if !@structured['byCraft'][recipe.Skill]['byCategory'].has_key? recipe.category.name
+        @structured['byCraft'][recipe.Skill]['byCategory'][recipe.category.name] = {}
       end
 
       # Insert recipe into nested and root hashes
       @structured['byID'].store(recipe.ID, recipe)
       @structured['byCraft'][recipe.Skill]['byID'].store(recipe.ID, recipe)
-      @structured['byCraft'][recipe.Skill]['byCategory'][recipe.category].store(recipe.ID, recipe)
+      @structured['byCraft'][recipe.Skill]['byCategory'][recipe.category.name].store(recipe.ID, recipe)
     end
 
     render json: @structured.to_json(:include => [
+        {:category => {:only => :name}},
         {:output => {:only => [:Name, :Qty]}},
         {:input => {:only => [:Name, :Qty]}},
         {:feat => {:only => :Feat}},

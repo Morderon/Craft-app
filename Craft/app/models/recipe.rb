@@ -4,5 +4,7 @@ class Recipe < ApplicationRecord
     has_many :output
     has_many :feat
     has_many :skill
-    #belongs_to :category column not named properly
+    # column not named properly
+    belongs_to :category,
+        foreign_key: "category"
 end
